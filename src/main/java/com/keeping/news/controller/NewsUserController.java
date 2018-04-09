@@ -14,14 +14,19 @@ import javax.xml.ws.RequestWrapper;
 /**
  * Created by keepspy on 2018/4/9.
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class NewsUserController {
 
     @Autowired
     NewsUserService newsUserService;
 
-    @RequestMapping("/login")
+    /**
+     * 登陆操作
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@ModelAttribute NewsUser user){
         boolean exist=newsUserService.isExsit(user);
         if(exist==false){
@@ -37,7 +42,6 @@ public class NewsUserController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @ResponseBody
     public String getNewsUser(@PathVariable int id){
         System.out.println(id);
         NewsUser user= newsUserService.getById(id);
@@ -48,9 +52,24 @@ public class NewsUserController {
         return "no";
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    public String addUser(@ModelAttribute NewsUser user){
-        String userName=user.getUserName();
-        return "";
+    /**
+     * 注册操作
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(@ModelAttribute NewsUser user){
+        if(user.getUserName()!=null && !user.getUserName().equals("")
+                && user.getPassword()!=null && !user.getPassword().equals("")
+                && user.getRealName()!=null && !user.getRealName().equals("")){  //基本属性检测
+
+            boolean exsit=newsUserService.register(user);
+            if(exsit==true){
+                Object json= JSONObject.toJSON(user);
+                return json.toString();
+            }
+            return "false";
+        }
+        return "false";
     }
 }
