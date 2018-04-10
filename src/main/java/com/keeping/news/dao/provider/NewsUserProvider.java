@@ -23,7 +23,7 @@ public class NewsUserProvider {
 
     public String insert(NewsUser user){
         SQL sql=new SQL();
-        sql.INSERT_INTO("news_user");
+        sql.INSERT_INTO(db);
         if(user.getUserName()!=null && !user.getUserName().equals("")){
             sql.VALUES("username",user.getUserName());
         }
@@ -43,7 +43,7 @@ public class NewsUserProvider {
 
     public String getListByMap(Map<String,Object> map){
        SQL sql=new SQL();
-        sql.SELECT("*").FROM("news_user");
+        sql.SELECT("*").FROM(db);
 
         for(String param : map.keySet()){
             sql.WHERE(param+" = " +map.get(param));

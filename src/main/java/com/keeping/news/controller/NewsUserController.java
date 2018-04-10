@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 
 /**
@@ -42,10 +43,11 @@ public class NewsUserController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public String getNewsUser(@PathVariable int id){
+    public String getNewsUser(@PathVariable int id, HttpSession session){
         System.out.println(id);
         NewsUser user= newsUserService.getById(id);
         if(user!=null){
+            session.setAttribute("cur_user",user);
             Object json= JSONObject.toJSON(user);
             return json.toString();
         }
