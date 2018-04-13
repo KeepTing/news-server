@@ -24,6 +24,11 @@ public class NewsUserServiceImpl implements NewsUserService {
     }
 
     @Override
+    public int addUser(NewsUser user) {
+        return newsUserMapper.insert(user);
+    }
+
+    @Override
     public List<NewsUser> getListByMap(Map<String, Object> map) {
         return null;
     }

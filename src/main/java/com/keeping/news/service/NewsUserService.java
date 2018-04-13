@@ -12,6 +12,8 @@ public interface NewsUserService {
 
     NewsUser getById(int id);
 
+    int addUser(NewsUser user);
+
     List<NewsUser> getListByMap(Map<String,Object> map);
 
     List<NewsUser> getByPage(Map<String ,Object> map,int pageIndex,int pageCount);

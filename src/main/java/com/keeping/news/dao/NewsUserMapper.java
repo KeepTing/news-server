@@ -22,7 +22,7 @@ public interface NewsUserMapper {
     NewsUser getById(@Param("id") int id);
 
     @InsertProvider(type = NewsUserProvider.class,method = "insert")
-    void insert(NewsUser user);
+    int insert(NewsUser user);
 
     @SelectProvider(type = NewsUserProvider.class,method = "getListByMap")
     List<NewsUser> getListByMap(Map<String ,Object> map);

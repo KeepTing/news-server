@@ -22,6 +22,7 @@ public class NewsUserController {
     @Autowired
     NewsUserService newsUserService;
 
+
     /**
      * 登陆操作
      * @param user
@@ -42,6 +43,12 @@ public class NewsUserController {
         return "false";
     }
 
+    /**
+     * 根据id获取用户
+     * @param id
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public String getNewsUser(@PathVariable int id, HttpSession session){
         System.out.println(id);
@@ -74,4 +81,31 @@ public class NewsUserController {
         }
         return "false";
     }
+
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/add")
+    public String addUser(@RequestBody NewsUser user){
+        if(user.getUserName() !=null && !user.getUserName().trim().equals("")
+                && user.getRealName()!=null && !user.getRealName().trim().equals("")
+                && user.getPassword()!=null && !user.getPassword().trim().equals("")){
+            int add=newsUserService.addUser(user);
+            System.out.println(add);
+            return "success";
+        }
+        return "error";
+    }
+
+
+    @GetMapping("/all")
+    public String getAll(){
+
+    }
+
+
+
 }
