@@ -1,16 +1,15 @@
 package com.keepting.news.dao.provider;
 
-import com.keepting.news.model.Review;
+import com.keepting.news.model.Comment;
 import org.apache.ibatis.jdbc.SQL;
-import org.bson.types.ObjectId;
 
 import java.util.Map;
 
 /**
  * Created by keepspy on 2018/4/14.
  */
-public class ReviewProvider {
-    String table="review";
+public class CommentProvider {
+    String table="comment";
 
     public String getById(int id){
         SQL sql=new SQL();
@@ -37,7 +36,7 @@ public class ReviewProvider {
         return sql.toString();
     }
 
-    public String insert(Review review){
+    public String insert(Comment comment){
         SQL sql=new SQL();
         sql.INSERT_INTO(table)
                 .VALUES("content","#{content}")
@@ -47,7 +46,7 @@ public class ReviewProvider {
         return  sql.toString();
     }
 
-    public String update(Review review){
+    public String update(Comment comment){
         return new SQL().UPDATE(table)
                 .SET("likes=#{likes}")
                 .SET("is_report=#{is_report}")

@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 /**
  * Created by keepspy on 2018/4/14.
  */
-public class Review {
+public class Comment {
     private int id;
     private int user_id;  //用户id
     private ObjectId article_id; //文章id
@@ -15,7 +15,7 @@ public class Review {
     private String report;  //举报内容
     private String createTime ; //创建时间
 
-    public Review(String content, int user_id,ObjectId article_id, int likes, int is_report, String report,String createTime) {
+    public Comment(String content, int user_id, ObjectId article_id, int likes, int is_report, String report, String createTime) {
         this.content = content;
         this.user_id = user_id;
         this.likes=likes;
@@ -25,7 +25,7 @@ public class Review {
         this.createTime=createTime;
     }
 
-    public Review() {
+    public Comment() {
     }
 
     public ObjectId getArticle_id() {
