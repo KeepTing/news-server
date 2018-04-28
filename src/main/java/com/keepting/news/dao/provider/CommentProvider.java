@@ -20,9 +20,11 @@ public class CommentProvider {
 
     public String getByParam(String param, Object value){
         SQL sql=new SQL();
-        sql.SELECT("*").FROM(table)
-                .WHERE("#{param} = #{value}");
-
+        sql.SELECT("*").FROM(table);
+        if(param.equals("id") ||param.equals("user_id") || param.equals("likes") ||param.equals("status"))
+                    sql.WHERE(param+" = "+value);
+        else
+            sql.WHERE(param+" = '"+value+"'");
         return sql.toString();
     }
 
@@ -30,7 +32,10 @@ public class CommentProvider {
         SQL sql=new SQL();
         sql.SELECT("*").FROM(table);
         map.forEach((key,value)->{
-            sql.WHERE("#{key} = #{value}");
+            if(key.equals("id") || key.equals("user_id") || key.equals("likes") || key.equals("status"))
+                sql.WHERE(key+" = "+value);
+            else
+                sql.WHERE(key+" = '"+value+"'");
         });
 
         return sql.toString();

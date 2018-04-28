@@ -16,7 +16,6 @@ import java.util.Map;
 /**
  * Created by keepspy on 2018/4/9.
  */
-@PropertySource("classpath:application.properties")
 public class NewsUserProvider {
 
 
@@ -49,9 +48,9 @@ public class NewsUserProvider {
         return  sql.toString();
     }
 
-    public String getPageByMap(Map<String ,Object> map,int pageIndex,int pageCount){
+    public String getPageByMap(Map<String ,Object> map,int pageIndex,int pageSize){
         String sql=getListByMap(map);
-        return sql+"limit "+pageIndex+" , "+pageCount;
+        return sql+"limit "+pageIndex*pageSize+" , "+pageSize;
     }
 
     public String update(NewsUser user){

@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by liuwei1 on 2016/12/5.
  */
-@Document(collection = "spider_article_2018")
+@Document(collection = "spider_article")
 public class SpiderArticle implements Serializable {
 
     private ObjectId _id;

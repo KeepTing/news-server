@@ -57,7 +57,7 @@ public class CommentController {
     public String like(@PathVariable("commentId") int commentId,HttpSession session){
         NewsUser user= (NewsUser) session.getAttribute("cur_user" );
         if(user!=null){
-            //更新评论
+            //更新评论，点赞数加一
             Comment comment=commentService.getById(commentId);
             comment.setLikes(comment.getLikes()+1);
             commentService.update(comment);
@@ -83,7 +83,7 @@ public class CommentController {
         NewsUser user= (NewsUser) session.getAttribute("cur_user" );
         if(user!=null){
             Comment comment=commentService.getById(comment_id);
-            comment.setIs_report(1);
+            comment.setStatus(1);
             comment.setReport(content);
 
             commentService.update(comment);

@@ -11,16 +11,16 @@ public class Comment {
     private ObjectId article_id; //文章id
     private int likes;
     private String content;  //评论内容
-    private int is_report;  //是否被举报
+    private int status;  //状态（0：正常 1：举报）
     private String report;  //举报内容
     private String createTime ; //创建时间
 
-    public Comment(String content, int user_id, ObjectId article_id, int likes, int is_report, String report, String createTime) {
+    public Comment(String content, int user_id, ObjectId article_id, int likes, int status, String report, String createTime) {
         this.content = content;
         this.user_id = user_id;
         this.likes=likes;
         this.article_id=article_id;
-        this.is_report = is_report;
+        this.status = status;
         this.report = report;
         this.createTime=createTime;
     }
@@ -68,12 +68,12 @@ public class Comment {
         this.user_id = user_id;
     }
 
-    public int getIs_report() {
-        return is_report;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public void setIs_report(int is_report) {
-        this.is_report = is_report;
+    public int getStatus() {
+        return status;
     }
 
     public String getReport() {

@@ -14,10 +14,10 @@ import java.util.Map;
 public interface CommentMapper {
 
     @SelectProvider(type = CommentProvider.class,method = "getById")
-    Comment getById(int id);
+    Comment getById(@Param("id") int id);
 
     @SelectProvider(type = CommentProvider.class,method = "getByParam")
-    List<Comment> getByParam(String param, Object value);
+    List<Comment> getByParam(@Param("param") String param, @Param("value") Object value);
 
     @SelectProvider(type = CommentProvider.class,method = "getListByMap")
     List<Comment> getListByMap(Map<String,Object> map);

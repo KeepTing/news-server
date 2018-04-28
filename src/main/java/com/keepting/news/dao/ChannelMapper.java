@@ -3,6 +3,7 @@ package com.keepting.news.dao;
 import com.keepting.news.dao.provider.ChannelProvider;
 import com.keepting.news.model.Channel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
@@ -15,10 +16,10 @@ import java.util.Map;
 public interface ChannelMapper {
 
     @SelectProvider(type = ChannelProvider.class,method = "getById")
-    Channel getById(int id);
+    Channel getById(@Param("id") int id);
 
     @SelectProvider(type = ChannelProvider.class,method = "getByName")
-    Channel getByName(String  channelName);
+    Channel getByName(@Param("channelName") String channelName);
 
     @SelectProvider(type = ChannelProvider.class,method = "getListByMap")
     List<Channel> getListByMap(Map<String,Object> map);
@@ -27,7 +28,7 @@ public interface ChannelMapper {
     List<Channel> getAll();
 
     @SelectProvider(type = ChannelProvider.class,method = "getChannelByUserId")
-    List<Channel> getChannelByUserId(int userId);
+    List<Channel> getChannelByUserId(@Param("userId") int userId);
 
 
 }

@@ -5,6 +5,7 @@ import com.keepting.news.model.NewsUser;
 import org.apache.ibatis.annotations.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public interface NewsUserMapper {
 
 
     @SelectProvider(type = NewsUserProvider.class,method = "getPageByMap")
-    List<NewsUser> getPageByMap(Map<String,Object> map,int pageIndex,int pageCount);
+    List<NewsUser> getPageByMap(Map<String,Object> map, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
     @UpdateProvider(type = NewsUserProvider.class,method = "update")
     void update(NewsUser user);

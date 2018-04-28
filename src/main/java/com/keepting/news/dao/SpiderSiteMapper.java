@@ -3,10 +3,7 @@ package com.keepting.news.dao;
 
 import com.keepting.news.dao.provider.SpiderSiteProvider;
 import com.keepting.news.model.SpiderSite;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -18,10 +15,10 @@ import java.util.Map;
 public interface SpiderSiteMapper {
 
     @SelectProvider(type = SpiderSiteProvider.class,method = "getById")
-    SpiderSite getById(int id);
+    SpiderSite getById(@Param("id") int id);
 
     @SelectProvider(type = SpiderSiteProvider.class,method = "getByParam")
-    List<SpiderSite> getByParam(String param,Object value);
+    List<SpiderSite> getByParam(@Param("param") String param,@Param("value") Object value);
 
     @SelectProvider(type = SpiderSiteProvider.class,method = "getByMap")
     List<SpiderSite> getByMap(Map<String, Object> map);
@@ -31,7 +28,7 @@ public interface SpiderSiteMapper {
 
 
     @SelectProvider(type = SpiderSiteProvider.class,method = "getPageList")
-    List<SpiderSite> getPageList(Map<String,Object> map,int pageIndex, int pageSize);
+    List<SpiderSite> getPageList(Map<String,Object> map,@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
     @SelectProvider(type = SpiderSiteProvider.class,method = "count")
     int count(Map<String,Object> map);
