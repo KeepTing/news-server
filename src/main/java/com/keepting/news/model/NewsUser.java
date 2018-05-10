@@ -13,12 +13,14 @@ public class NewsUser {
     private String realName;
     private String password;
     private  String createTime;
+    private String headImg;
     private int score;
 
 
-    public NewsUser(int id, String userName, String realName, String password,int score, String createTime) {
+    public NewsUser(int id,String headImg, String userName, String realName, String password,int score, String createTime) {
         this.id = id;
         this.userName = userName;
+        this.headImg=headImg;
         this.realName = realName;
         this.password = password;
         this.score=score;
@@ -34,6 +36,14 @@ public class NewsUser {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
+    public String getHeadImg() {
+        return headImg;
     }
 
     public String getUserName() {

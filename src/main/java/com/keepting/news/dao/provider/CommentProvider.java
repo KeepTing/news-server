@@ -25,6 +25,7 @@ public class CommentProvider {
                     sql.WHERE(param+" = "+value);
         else
             sql.WHERE(param+" = '"+value+"'");
+        sql.ORDER_BY("createTime desc");
         return sql.toString();
     }
 
@@ -47,14 +48,15 @@ public class CommentProvider {
                 .VALUES("content","#{content}")
                 .VALUES("user_id","#{user_id}")
                 .VALUES("article_id","#{article_id}")
-                .VALUES("is_report","0");
+                .VALUES("createTime","#{createTime}")
+                .VALUES("status","0");
         return  sql.toString();
     }
 
     public String update(Comment comment){
         return new SQL().UPDATE(table)
                 .SET("likes=#{likes}")
-                .SET("is_report=#{is_report}")
+                .SET("status=#{status}")
                 .SET("report=#{report}")
                 .WHERE("id=#{id}").toString();
     }

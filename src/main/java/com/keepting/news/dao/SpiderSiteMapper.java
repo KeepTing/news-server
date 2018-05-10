@@ -17,11 +17,11 @@ public interface SpiderSiteMapper {
     @SelectProvider(type = SpiderSiteProvider.class,method = "getById")
     SpiderSite getById(@Param("id") int id);
 
-    @SelectProvider(type = SpiderSiteProvider.class,method = "getByParam")
-    List<SpiderSite> getByParam(@Param("param") String param,@Param("value") Object value);
+    @SelectProvider(type = SpiderSiteProvider.class,method = "getListByParam")
+    List<SpiderSite> getListByParam(@Param("param") String param,@Param("value") Object value);
 
-    @SelectProvider(type = SpiderSiteProvider.class,method = "getByMap")
-    List<SpiderSite> getByMap(Map<String, Object> map);
+    @SelectProvider(type = SpiderSiteProvider.class,method = "getListByMap")
+    List<SpiderSite> getListByMap(Map<String, Object> map);
 
     @UpdateProvider(type = SpiderSiteProvider.class,method = "update")
     int update(SpiderSite spiderSite);

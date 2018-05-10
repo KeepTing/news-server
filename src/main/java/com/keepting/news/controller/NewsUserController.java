@@ -3,10 +3,17 @@ package com.keepting.news.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.keepting.news.model.NewsUser;
 import com.keepting.news.service.NewsUserService;
+import com.keepting.news.util.QiniuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,8 +24,11 @@ import java.util.List;
 @RequestMapping("/user")
 public class NewsUserController {
 
+    String headImg="head.png";
+
     @Autowired
     NewsUserService newsUserService;
+
 
     /**
      * 判断是否登录
@@ -45,7 +55,7 @@ public class NewsUserController {
 
         NewsUser existUser=newsUserService.login(user);
         if(existUser!=null){  //登陆成功
-            session.setAttribute("cur_user",existUser);
+            session.setAttribute("user",existUser);
             return JSONObject.toJSONString(existUser); //返回用户对象
         }
         return "false";
@@ -74,8 +84,15 @@ public class NewsUserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(@ModelAttribute NewsUser user){
+    @PostMapping(value = "/register")
+    public String register(@RequestBody NewsUser user){
+//        NewsUser user=new NewsUser();
+//        user.setUserName((String) map.get("userName"));
+//        user.setRealName((String) map.get("realName"));
+//        user.setPassword((String) map.get("password"));
+        user.setScore(100);
+        user.setHeadImg(headImg);
+        user.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         if(user.getUserName()!=null && !user.getUserName().equals("")
                 && user.getPassword()!=null && !user.getPassword().equals("")
                 && user.getRealName()!=null && !user.getRealName().equals("")){  //基本属性检测

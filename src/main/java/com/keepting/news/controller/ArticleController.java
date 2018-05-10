@@ -7,6 +7,7 @@ import com.keepting.news.model.NewsUser;
 import com.keepting.news.model.Comment;
 import com.keepting.news.model.SpiderArticle;
 import com.keepting.news.service.CommentService;
+import com.keepting.news.service.NewsUserService;
 import com.keepting.news.service.SpiderArticleService;
 import org.bson.types.ObjectId;
 import org.omg.CORBA.OBJ_ADAPTER;
@@ -30,19 +31,20 @@ public class ArticleController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    NewsUserService newsUserService;
+
     /**
      * 根据文章id获取文章页面信息，包括文章信息，最新评论，最热评论
      * @param id
      * @param session
      * @return
      */
-    @RequestMapping("detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(@PathVariable String id , HttpSession session){
-        NewsUser user= (NewsUser) session.getAttribute("cur_user");
-        if(user==null){
-            return "no_login";
-        }
 
+        //保存当前浏览的文章id
+        session.setAttribute("curArticleId",id);
 
         Map<String,Object> map=new HashMap<>();
         ObjectId objectId=new ObjectId(id);
@@ -50,15 +52,31 @@ public class ArticleController {
 
         //根据article_id获取此篇文章下的所有评论
         List<Comment> comments=commentService.getListByParam("article_id",id);
-        int size=comments.size();
+        int size=comments.size()>20?20:comments.size();
+        List<Map> newComments=new ArrayList<>();
+        for(int i=0;i<size;i++){
+            Comment comment=comments.get(i);
+            if(comment!=null){
+                Map<String,Object> commentMap=new HashMap<>();
+                commentMap.put("commentId",comment.getId());
+                commentMap.put("commentContent",comment.getContent());
+                commentMap.put("commentTime",comment.getCreateTime());
+                commentMap.put("likes",comment.getLikes());
+                NewsUser user=newsUserService.getById(comment.getUser_id());
+                commentMap.put("username",user.getUserName());
+                commentMap.put("headImg",user.getHeadImg());
 
-        //获取发表时间最近的20条记录
-        List<Comment> newComments=comments.subList(0,size<commentSize?size:commentSize);
+                newComments.add(commentMap);
+            }
 
+        }
+//        //获取发表时间最近的20条记录
+//        List<Comment> newComments=comments.subList(0,size<commentSize?size:commentSize);
+//        List<Map> comments
         map.put("article",article);
         map.put("comments",newComments);
 
-        session.setAttribute("json",JSONObject.toJSONString(map));
+
         return JSONObject.toJSONString(map);
     }
 

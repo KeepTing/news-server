@@ -26,10 +26,11 @@ public class ChannelProvider {
     public String getListByMap(Map<String,Object> map){
         SQL sql=new SQL();
         sql.SELECT("*").FROM(table);
-        for(String param : map.keySet()){
-            sql.WHERE(param+" = "+map.get(param));
-        }
-
+        map.forEach((key,value)->{
+            if(key.equals("id"))
+                sql.WHERE(key+" = "+value);
+            sql.WHERE(key+" = '"+value+"'");
+        });
         return sql.toString();
     }
 

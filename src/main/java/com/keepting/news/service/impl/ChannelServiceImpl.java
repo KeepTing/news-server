@@ -5,6 +5,7 @@ import com.keepting.news.dao.UserChannelMapper;
 import com.keepting.news.model.Channel;
 import com.keepting.news.model.UserChannel;
 import com.keepting.news.service.ChannelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.List;
 @Service
 public class ChannelServiceImpl implements ChannelService {
 
+    @Autowired
     ChannelMapper channelMapper;
 
+    @Autowired
     UserChannelMapper userChannelMapper;
 
     @Override

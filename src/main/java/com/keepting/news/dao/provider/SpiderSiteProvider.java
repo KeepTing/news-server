@@ -21,17 +21,19 @@ public class SpiderSiteProvider {
         }}.toString();
     }
 
-    public String getByParam(String param,Object value){
+    public String getListByParam(String param,Object value){
         return new SQL(){{
             SELECT("*").FROM(table).WHERE("#{param} = #{value}");
         }}.toString();
     }
 
 
-    public String getByMap(Map<String,Object> map){
+    public String getListByMap(Map<String,Object> map){
         SQL sql=new SQL();
         sql.SELECT("*").FROM(table);
-        map.forEach((key,value)->{sql.WHERE(key+" = "+value);});
+        map.forEach((key,value)->{
+            sql.WHERE(key+" = '"+value+"'");
+        });
         return  sql.toString();
     }
 

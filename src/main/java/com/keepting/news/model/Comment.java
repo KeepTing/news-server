@@ -8,14 +8,14 @@ import org.bson.types.ObjectId;
 public class Comment {
     private int id;
     private int user_id;  //用户id
-    private ObjectId article_id; //文章id
+    private String article_id; //文章id
     private int likes;
     private String content;  //评论内容
     private int status;  //状态（0：正常 1：举报）
     private String report;  //举报内容
     private String createTime ; //创建时间
 
-    public Comment(String content, int user_id, ObjectId article_id, int likes, int status, String report, String createTime) {
+    public Comment(String content, int user_id, String article_id, int likes, int status, String report, String createTime) {
         this.content = content;
         this.user_id = user_id;
         this.likes=likes;
@@ -28,12 +28,13 @@ public class Comment {
     public Comment() {
     }
 
-    public ObjectId getArticle_id() {
-        return article_id;
+
+    public void setArticle_id(String article_id) {
+        this.article_id = article_id;
     }
 
-    public void setArticle_id(ObjectId article_id) {
-        this.article_id = article_id;
+    public String getArticle_id() {
+        return article_id;
     }
 
     public int getId() {

@@ -33,7 +33,9 @@ public class NewsUserProvider {
                     .VALUES("username","#{userName}")
                     .VALUES("password","#{password}")
                     .VALUES("realname","#{realName}")
-                    .VALUES("createTime",new SimpleDateFormat("yyyy-MM-dd HH:mm;ss").format(new Date()));
+                    .VALUES("score","#{score}")
+                    .VALUES("headImg","#headImg")
+                    .VALUES("createTime","#{createTime}");
         }}.toString();
     }
 
@@ -42,7 +44,10 @@ public class NewsUserProvider {
         SQL sql=new SQL();
         sql.SELECT("*").FROM(table);
         map.forEach((key,value)->{
-            sql.WHERE(key+" = "+value);
+            if(key.equals("score"))
+                sql.WHERE(key+" = "+value);
+            else
+                sql.WHERE(key+" = '"+value+"'");
         });
         System.out.println(sql.toString());
         return  sql.toString();

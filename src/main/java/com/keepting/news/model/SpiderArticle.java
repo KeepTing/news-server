@@ -26,7 +26,8 @@ public class SpiderArticle implements Serializable {
 //   发表时间
     private String publishedTime;
 //    创建时间
-    private Long createTime;
+    private String createTime;
+
     private String catid;
 //    来源
     private String from;
@@ -172,12 +173,11 @@ public class SpiderArticle implements Serializable {
         this.publishedTime = publishedTime;
     }
 
-    public Long getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
-
 }

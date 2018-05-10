@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getById(int id) {
-        return null;
+        return commentMapper.getById(id);
     }
 
     @Override

@@ -56,16 +56,17 @@ public class NewsUserServiceImpl implements NewsUserService {
 
     @Override
     public NewsUser login(NewsUser user) {
-        Map<String ,Object> map=new HashMap<>();
-        map.put("username",user.getUserName());
-        map.put("password",user.getPassword());
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", user.getUserName());
+        map.put("password", user.getPassword());
 
-        List<NewsUser> list=newsUserMapper.getListByMap(map);
-        if(list!=null && list.size()>=0){
-            return null;
+        List<NewsUser> list = newsUserMapper.getListByMap(map);
+        if (list != null && list.size() > 0) {
+            return list.get(0);
         }
-        return list.get(0);
+        return null;
     }
+
 
     @Override
     public boolean register(NewsUser user) {

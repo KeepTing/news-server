@@ -5,14 +5,14 @@ package com.keepting.news.model;
  */
 public class Channel {
     private int id;
-    private String channelName;
+    private String channel_name;
 
     public Channel() {
     }
 
-    public Channel(int id, String channelName) {
+    public Channel(int id, String channel_name) {
         this.id = id;
-        this.channelName = channelName;
+        this.channel_name = channel_name;
     }
 
     public int getId() {
@@ -23,11 +23,11 @@ public class Channel {
         this.id = id;
     }
 
-    public String getChannelName() {
-        return channelName;
+    public void setChannel_name(String channel_name) {
+        this.channel_name = channel_name;
     }
 
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
+    public String getChannel_name() {
+        return channel_name;
     }
 }
